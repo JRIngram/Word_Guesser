@@ -23,7 +23,7 @@ public class WordGenerator{
 				wordBuilder.append(consonantGenerator(consonantNumber));
 			}
 		}
-		word = wordBuilder.toString();
+		word = wordBuilder.toString().toUpperCase();
 		return word;
 		
 	}
