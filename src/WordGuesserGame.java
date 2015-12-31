@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 import java.util.Random;
 
@@ -7,6 +8,7 @@ public class WordGuesserGame {
 	private static Scanner input;
 	private static String chosenWord = null;
 	private static int numberOfGuesses = 0;
+	private static int wordLength = 5;
 	
 			
 	public static void main(String[] args) {
@@ -15,13 +17,22 @@ public class WordGuesserGame {
 		input = new Scanner(System.in);
 		boolean correct = false;
 		
-		
+				
+		System.out.print("Welcome to WordGuesser!\nHow many letters would you like in the words? Must be between 5-10.\n");
+		System.out.print("> ");
+		wordLength = input.nextInt();
+		if(wordLength < 5){
+			wordLength = 4; 
+		}
+		else if(wordLength > 10){
+			wordLength = 10;
+		}
 		//Generates 10 words.
 		for(int i = 0; i < 10; i++){
-			words[i] = wordGen.generateWord();
+			words[i] = wordGen.generateWord(wordLength);
 			for(int c = i - 1; c >= 0 ; c--){
 				while(words[i].equals(words[c])){
-					words[i] = wordGen.generateWord();
+					words[i] = wordGen.generateWord(wordLength);
 				}
 			}
 		}
@@ -93,7 +104,7 @@ public class WordGuesserGame {
 					similarity++;
 				}
 			}
-			System.out.println("You chose " + words[guess] + ". This has a similarity of " + similarity + "/5.");
+			System.out.println("You chose " + words[guess] + ". This has a similarity of " + similarity + "/" + wordLength + ".");
 			System.out.print("Guess another word, or enter 0 or a negative number to exit.");
 			return false;
 		}

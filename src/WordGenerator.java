@@ -8,14 +8,15 @@ public class WordGenerator{
 		
 	}
 	
-	public String generateWord(){
+	//Random generates a word with the length specified by the user.
+	public String generateWord(int wordLength){
 		Random vowelRandom = new Random();
 		Random consonantRandom = new Random();
 		String word;
 		StringBuilder wordBuilder = new StringBuilder();
 								
-		for(int i = 0; i < 5; i++){
-			if(i == 1 || i == 4){ //On 2nd or 4th letter, generate a vowel. 
+		for(int i = 0; i < wordLength; i++){
+			if(i == 1 || i == 4 || i == 7 || i == 9){ //On 2nd, 4th, 7th and 10th letter, generate a vowel. 
 				int vowelNumber = vowelRandom.nextInt(5);
 				wordBuilder.append(vowelGenerator(vowelNumber));
 			}else{ 
@@ -47,7 +48,7 @@ public class WordGenerator{
 				vowel = "u";
 				break;
 			default:
-				vowel = "E!"; //Change for testing;
+				vowel = "E!"; //Signifies an error.
 		}
 		return vowel;
 		
@@ -120,7 +121,7 @@ public class WordGenerator{
 			consonant = "z";
 			break;
 		default:
-			consonant = "E!"; //Change for testing
+			consonant = "E!"; //Signifies an error.
 			
 		}
 		return consonant;
