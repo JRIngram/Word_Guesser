@@ -1,3 +1,4 @@
+//@Version 1.2
 
 import java.util.Scanner;
 import java.util.Random;
@@ -21,12 +22,14 @@ public class WordGuesserGame {
 		System.out.print("Welcome to WordGuesser!\nHow many letters would you like in the words? Must be between 5-10.\n");
 		System.out.print("> ");
 		wordLength = input.nextInt();
+		
 		if(wordLength < 5){
-			wordLength = 4; 
+			wordLength = 5; 
 		}
 		else if(wordLength > 10){
 			wordLength = 10;
 		}
+		
 		//Generates 10 words.
 		for(int i = 0; i < 10; i++){
 			words[i] = wordGen.generateWord(wordLength);
@@ -73,6 +76,23 @@ public class WordGuesserGame {
 		chosenWord = words[wordNumber]; 
 	}
 	
+	//Used to check number of guesses.
+	public static boolean maxGuesses(){
+		if(numberOfGuesses >= 4){
+			System.out.println("You have had your 4 guesses and haven't guessed the correct word!\nYou lose!\nThe correct word was: " + chosenWord + ".");
+			return true;
+		}
+		else if(numberOfGuesses > 1){
+			System.out.println("You have had " + numberOfGuesses + " guesses.");
+			return false;
+		}
+		else{
+			System.out.println("You have had " + numberOfGuesses + " guess.");
+			return false;
+		}
+		
+	}
+	
 	//Main loop for the game.
 	public static boolean game(int guess){
 		//-1 so that the user input aligns with the number on the word list.
@@ -95,7 +115,9 @@ public class WordGuesserGame {
 			return true;
 		
 		//Splits string into characters and compares each character	
-		}else{
+		}
+		
+		else{
 			int similarity = 0;
 			String chosenWordLetters[] = chosenWord.split("");
 			String guessLetters[] = words[guess].split("");
@@ -104,9 +126,14 @@ public class WordGuesserGame {
 					similarity++;
 				}
 			}
-			System.out.println("You chose " + words[guess] + ". This has a similarity of " + similarity + "/" + wordLength + ".");
-			System.out.print("Guess another word, or enter 0 or a negative number to exit.");
-			return false;
+			System.out.println("\nYou chose " + words[guess] + ". This has a similarity of " + similarity + "/" + wordLength + ".");
+			if(!maxGuesses()){
+				System.out.print("Guess another word, or enter 0 or a negative number to exit.\n");
+				return false;
+			} 
+			else{
+				return true;
+			}
 		}
 	}
 
