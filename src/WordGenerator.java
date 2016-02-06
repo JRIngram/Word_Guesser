@@ -132,13 +132,7 @@ public class WordGenerator{
 	}
 	
 	//Checks word length and creates a list of 10 words
-	public void makeWordList(int wordLength, int minLength, int maxLength){
-		if(wordLength < minLength){
-			wordLength = minLength; 
-		}
-		else if(wordLength > maxLength){
-			wordLength = maxLength;
-		}
+	public void makeWordList(int wordLength){
 		this.wordLength = wordLength;
 		for(int i = 0; i < 10; i++){
 			words[i] = generateWord(wordLength);

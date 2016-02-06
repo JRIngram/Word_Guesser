@@ -62,13 +62,6 @@ public class WordGuesserGame{
 		guess--;
 		System.out.print("\n");
 		
-		/*
-		*	if(guess == 0){
-		*	//
-		*	return false; 
-		*	}
-		*/
-		
 		//Allows user to exit game
 		if(guess <= -1){
 			return true;
@@ -115,29 +108,44 @@ public class WordGuesserGame{
 		return similarity;
 	}
 	
+	//Allows the user to choose one of the predefined difficulties.	
 	public static void chooseDifficulty(){
 		System.out.print("Welcome to WordGuesser! What difficulty would you like to play?\n"
 				+ "'EASY': 5 letter-length words, 4 guesses.\n"
 				+ "'MED': 7 letter-length words, 4 guesses.\n"
-				+ "'HARD': 10 letter-length words, 4 guesses.\n> ");
+				+ "'HARD': 10 letter-length words, 4 guesses.\n"
+				+ "'CUST': Custom letter-length, 4 guesses.\n> ");
 		boolean valid = false;
-		while(valid == false){
+		while(!valid){
 			String difficulty = input.nextLine();
 			if(difficulty.toUpperCase().equals("EASY")){
 				valid = true; 
-				wordGen.makeWordList(4, 5, 10);
+				wordGen.makeWordList(5);
 				System.out.print("EASY difficulty chosen: \n\n");
 			}else if(difficulty.toUpperCase().equals("MED")){
 				valid = true; 
-				wordGen.makeWordList(7,5,10);
+				wordGen.makeWordList(7);
 				System.out.print("MED difficulty chosen: \n\n");
 			}else if(difficulty.toUpperCase().equals("HARD")){
 				valid = true;
-				wordGen.makeWordList(10, 5, 10);
+				wordGen.makeWordList(10);
 				System.out.print("HARD difficulty chosen: \n\n");
+			}else if(difficulty.toUpperCase().equals("CUST")){
+				System.out.println("CUST difficulty chosen: ");
+				while(!valid){
+					System.out.print("What length would you like the words?(Min: 3; Max: 10)\n> ");
+					int length = input.nextInt();
+					if(length >= 3 && length <= 10){
+						valid = true; 
+						wordGen.makeWordList(length);
+					}else{
+						System.out.println("Invalid length entered.\n");	
+					}
+				}
 			}else{
 				System.out.print("Invalid difficulty.\nPlease choose a difficulty from the list above.\n> ");
 			}
+			
 		}
 	}
 	
