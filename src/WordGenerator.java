@@ -157,10 +157,12 @@ public class WordGenerator{
 	
 	//Prints list of all words from the word array.
 	public void printWordList(){
+		System.out.println("************");
 		for(int i = 0; i < 10; i++){
 			System.out.print(i + 1 + ". ");
 			System.out.println(words[i]);
-		}		
+		}
+		System.out.println("************\n");
 	}
 	
 	//Selects and returns a random word from the generated words.

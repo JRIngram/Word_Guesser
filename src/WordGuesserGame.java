@@ -1,4 +1,4 @@
-//@Version 08/01/2016
+//@Version 06/02/2016
 
 import java.util.Scanner;
 
@@ -13,10 +13,8 @@ public class WordGuesserGame{
 		wordGen = new WordGenerator();
 		input = new Scanner(System.in);
 		boolean correct = false;
-			
-		System.out.print("Welcome to WordGuesser!\nHow many letters would you like in the words? Must be between 5-10.\n");
-		System.out.print("> ");
-		wordGen.makeWordList(input.nextInt(), 5, 10);
+		
+		chooseDifficulty();
 		chosenWord = wordGen.wordChooser();
 		welcome();
 		
@@ -31,16 +29,14 @@ public class WordGuesserGame{
 	
 	//Prints welcome message and list of words for the game.
 	public static void welcome(){
-		System.out.println("************");
 		wordGen.printWordList();
-		System.out.println("************\n");
 		System.out.println("The computer has chosen a word from the list above.");
 		System.out.println("It is your job to work out which word the computer has chosen.");
 		System.out.println("This is done by entering the number of the word you wish to guess from above.");
 		System.out.println("You will then be told the similarity of the chosen word, and your guess.");
 		System.out.println("Similarity is defined as the same letter in the same position.");
 		System.out.println("For example: If the computer chose 'bacde' and you guessed 'bucke' the similarity would be 3/5 as both words contain b, c and e in the same position.");
-		System.out.println("Begin by choosing the number of the word you want to guess, or enter 0 or a negative number to exit.:");
+		System.out.println("Begin by choosing the number of the word you want to guess, enter 0 to enter command mode, or a negative number to exit.:");
 	}
 	
 	//Used to check number of guesses.
@@ -62,11 +58,19 @@ public class WordGuesserGame{
 	
 	//Main loop for the game.
 	public static boolean guessChecker(int guess){
-		//-1 so that the user input aligns with the number on the word list.
+		//guess -1 so that the user input aligns with the number on the word list.
 		guess--;
 		System.out.print("\n");
+		
+		/*
+		*	if(guess == 0){
+		*	//
+		*	return false; 
+		*	}
+		*/
+		
 		//Allows user to exit game
-		if(guess < 0){
+		if(guess <= -1){
 			return true;
 		}
 		
@@ -110,5 +114,31 @@ public class WordGuesserGame{
 		}
 		return similarity;
 	}
+	
+	public static void chooseDifficulty(){
+		System.out.print("Welcome to WordGuesser! What difficulty would you like to play?\n"
+				+ "'EASY': 5 letter-length words, 4 guesses.\n"
+				+ "'MED': 7 letter-length words, 4 guesses.\n"
+				+ "'HARD': 10 letter-length words, 4 guesses.\n> ");
+		boolean valid = false;
+		while(valid == false){
+			String difficulty = input.nextLine();
+			if(difficulty.toUpperCase().equals("EASY")){
+				valid = true; 
+				wordGen.makeWordList(4, 5, 10);
+				System.out.print("EASY difficulty chosen: \n\n");
+			}else if(difficulty.toUpperCase().equals("MED")){
+				valid = true; 
+				wordGen.makeWordList(7,5,10);
+				System.out.print("MED difficulty chosen: \n\n");
+			}else if(difficulty.toUpperCase().equals("HARD")){
+				valid = true;
+				wordGen.makeWordList(10, 5, 10);
+				System.out.print("HARD difficulty chosen: \n\n");
+			}else{
+				System.out.print("Invalid difficulty.\nPlease choose a difficulty from the list above.\n> ");
+			}
+		}
+	}
+	
 }
-
