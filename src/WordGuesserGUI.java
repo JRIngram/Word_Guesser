@@ -71,7 +71,6 @@ public class WordGuesserGUI {
 			}
 		});
 		
-		
 		//Display
 		mainFrame.pack();
 		mainFrame.setVisible(true);
