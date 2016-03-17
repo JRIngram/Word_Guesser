@@ -5,7 +5,7 @@ import javax.swing.*;
 
 /**Generates a GUI for the Word Guesser Game
  * @author JRIngram
- * @version 06/03/2016
+ * @version 17/03/2016
  * 
  **/ 
 
@@ -14,18 +14,18 @@ public class WordGuesserGUI {
 	private JFrame mainFrame;
 	private JTextArea list;
 
-	public WordGuesserGUI(WordGenerator wordGen){
+	public WordGuesserGUI(WordGenerator wg){
 		JButton quitButton = new JButton();
 		quitButton.setText("Quit");
 		quitButton.setToolTipText("Allows user to exit program");
 		//Constructs 10 buttons, 1 for each word.
-		JButton[] wordButtons = new JButton[10];
-		for(int i = 0; i <= wordButtons.length - 1; i++){
-			wordButtons[i] = new JButton();
-			wordButtons[i].setText(wordGen.getWord(i));
-			wordButtons[i].setToolTipText("Guess " + wordGen.getWord(i) + " as the correct word.");
+		JButton[] wordButton = new JButton[10];
+		for(int i = 0; i <= wordButton.length - 1; i++){
+			wordButton[i] = new JButton();
+			wordButton[i].setText(wg.getWord(i));
+			wordButton[i].setToolTipText("Guess " + wg.getWord(i) + " as the correct word.");
 		}
-		list = new JTextArea(wordGen.printWordList() +
+		list = new JTextArea(wg.printWordList() +
 				"The computer has chosen a word from the list above.\n"
 				+ "It is your job to work out which word the computer has chosen.\n"
 				+ "This is done by entering the number of the word you wish to guess from above.\n"
@@ -61,10 +61,10 @@ public class WordGuesserGUI {
 		guessBox.add(guessRow1, BorderLayout.CENTER);
 		guessBox.add(guessRow2, BorderLayout.SOUTH);
 		for(int i = 0; i <= 4; i++){
-			guessRow1.add(wordButtons[i]);
+			guessRow1.add(wordButton[i]);
 		}
-		for(int i = 5; i <= wordButtons.length - 1; i++){
-			guessRow2.add(wordButtons[i]);
+		for(int i = 5; i <= wordButton.length - 1; i++){
+			guessRow2.add(wordButton[i]);
 		}
 		
 		//Event Handlers
@@ -76,6 +76,12 @@ public class WordGuesserGUI {
 		quitButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				exitProgram();
+			}
+		});
+		
+		wordButton[0].addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+
 			}
 		});
 		
