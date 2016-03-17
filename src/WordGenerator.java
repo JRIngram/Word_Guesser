@@ -197,13 +197,14 @@ public class WordGenerator{
 	 * <p>Prints all item in the wordList array. This would need to be edited if the size of the wordList array was increased,
 	 * as a normal for loop is used rather than an enhanced for loop.</p> 
 	 * */
-	public void printWordList(){
-		System.out.println("************");
+	public String printWordList(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("*********************\n");
 		for(int i = 0; i < 10; i++){
-			System.out.print(i + 1 + ". ");
-			System.out.println(words[i]);
+			sb.append(i + 1 + ". " + words[i] + "\n");
 		}
-		System.out.println("************\n");
+		sb.append("*********************\n");
+		return sb.toString();
 	}
 	
 	/**

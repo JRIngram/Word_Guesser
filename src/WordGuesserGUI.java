@@ -25,7 +25,15 @@ public class WordGuesserGUI {
 			wordButtons[i].setText(wordGen.getWord(i));
 			wordButtons[i].setToolTipText("Guess " + wordGen.getWord(i) + " as the correct word.");
 		}
-		list = new JTextArea();
+		list = new JTextArea(wordGen.printWordList() +
+				"The computer has chosen a word from the list above.\n"
+				+ "It is your job to work out which word the computer has chosen.\n"
+				+ "This is done by entering the number of the word you wish to guess from above.\n"
+				+ "You will then be told the similarity of the chosen word, and your guess.\n"
+				+ "Similarity is defined as the same letter in the same position.\n"
+				+ "For example:\nIf the computer chose 'bacde' and you guessed 'bucke' the similarity would be 3/5.\n"
+				+ "This is because both words contain b, c and e in the same position.\n"
+				+ "Begin by choosing the word you want to guess.");
 		
 		//GUI properties.
 		list.setEditable(false);
