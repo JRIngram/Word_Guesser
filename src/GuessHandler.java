@@ -1,7 +1,7 @@
 /**Handles and processes the players guesses
  * 
  * @author JRIngram
- * @version 17/03/2016
+ * @version 18/03/2016
  *
  */
 public class GuessHandler {
@@ -23,17 +23,14 @@ public class GuessHandler {
 	 * @param maxGuesses determines the maximum number of guesses the player can have. 
 	 * @return boolean: returns true if the player has guessed equal or more than the maximum guesses. 
 	 * */
-	public boolean maxGuesses(int maxGuesses){
+	public boolean overMaxGuesses(int maxGuesses){
 		if(numberOfGuesses >= maxGuesses){
-			System.out.println("You have had your " + maxGuesses + " guesses and haven't guessed the correct word!\nYou lose!\nThe correct word was: " + chosenWord + ".");
 			return true;
 		}
 		else if(numberOfGuesses > 1){
-			System.out.println("You have had " + numberOfGuesses + " guesses.");
 			return false;
 		}
 		else{
-			System.out.println("You have had " + numberOfGuesses + " guess.");
 			return false;
 		}
 		
@@ -48,22 +45,13 @@ public class GuessHandler {
 	 * */
 	public boolean guessChecker(int guess){
 		//If the guess and the word are the same, congratulate player and exit game.
-		if(wordGen.getWord(guess).equals(chosenWord)){
-			System.out.println("CONGRATULATIONS! " + wordGen.getWord(guess) + " was the correct word!");
-			if(numberOfGuesses == 1){
-				System.out.println("You solved it in a single guess!");
-			}else{
-				System.out.println("You solved it in " + numberOfGuesses + " guesses!");
-			}
-				
+		if(wordGen.getWord(guess).equals(chosenWord)){	
 			return true;		
 		}
 		
 		//Displays similarity between guessed word and chosen word.
 		else{
-			System.out.println("You chose " + wordGen.getWord(guess) + ". This has a similarity of " + getSimilarity(guess) + "/" + wordGen.getWordLength() + ".");
-			if(!maxGuesses(4)){
-				System.out.print("Guess another word, or enter 0 or a negative number to exit.\n");
+			if(!overMaxGuesses(4)){
 				return false;
 			} 
 			else{
@@ -72,27 +60,35 @@ public class GuessHandler {
 		}
 	}
 	
-	public String appendGuess(int guess){
+	/**Appends the text area of the GUI.
+	 * 
+	 * @param guess
+	 * @return String: The string that is changing the text-area of the GUI.
+	 */
+	public String appendGuessText(int guess){
 		StringBuilder sb = new StringBuilder();
+		numberOfGuesses++;
 		if(wordGen.getWord(guess).equals(chosenWord)){
-			sb.append("CONGRATULATIONS! " + wordGen.getWord(guess) + " was the correct word!");
+			sb.append("CONGRATULATIONS! " + wordGen.getWord(guess) + " was the correct word!\n");
 			if(numberOfGuesses == 1){
-				sb.append("You solved it in a single guess!");
+				sb.append("You solved it in a single guess!\n");
 			}else{
-				sb.append("You solved it in " + numberOfGuesses + " guesses!");
+				sb.append("You solved it in " + numberOfGuesses + " guesses!\n");
 			}
 			return sb.toString();		
 		}
 		//Displays similarity between guessed word and chosen word.
 		else{
-			sb.append("You chose " + wordGen.getWord(guess) + ". This has a similarity of " + getSimilarity(guess) + "/" + wordGen.getWordLength() + ".");
-			if(!maxGuesses(4)){
-				sb.append("Guess another word, or enter 0 or a negative number to exit.\n");
-				return sb.toString();
-			} 
-			else{
-				return sb.toString();
-				}
+			sb.append("You chose " + wordGen.getWord(guess) + ": This has a similarity of " + getSimilarity(guess) + "/" + wordGen.getWordLength() + ".");
+			if(!overMaxGuesses(4)){
+				sb.append("\nPlease guess another word.");
+			}
+			sb.append("\n*********************\n");
+			if(overMaxGuesses(4)){
+				sb.append("Unfortunately you are over your maximum guesses!\n");
+				sb.append("The correct word was: " + chosenWord);
+			}
+			return sb.toString();
 		}
 	}
 	

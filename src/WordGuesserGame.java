@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
-/**@version 06/02/2016
+/**@version 17/03/2016
  * @author JRIngram 
  * */
 
@@ -16,15 +16,16 @@ public class WordGuesserGame{
 	/**
 	 * Main class: consists of assigning variables and a main-loop
 	 * */
-	public static void main(String[] args) {
+	public WordGuesserGame(){
 		wordGen = new WordGenerator();
+		GuessHandler gh = new GuessHandler(wordGen); 
 		input = new Scanner(System.in);
 		chosenWord = null;
 		numberOfGuesses = 0;
 		correct = false;
 		chooseDifficulty();
 		chosenWord = wordGen.wordChooser();
-		WordGuesserGUI gui = new WordGuesserGUI(wordGen);
+		WordGuesserGUI gui = new WordGuesserGUI(wordGen, gh);
 		welcome();
 		
 		while(!correct){
@@ -38,6 +39,7 @@ public class WordGuesserGame{
 	
 	/**Prints welcome message and list of words for the game.*/
 	public static void welcome(){
+		//Prints info to the console.
 		wordGen.printWordList();
 		System.out.println("The computer has chosen a word from the list above.");
 		System.out.println("It is your job to work out which word the computer has chosen.");
@@ -78,19 +80,13 @@ public class WordGuesserGame{
 	 * @return boolean: returns true if entered the correct word, or 0 or lower true is returned. If it's the wrong word false is returned.
 	 * */
 	
-	//***ERROR: Player can enter >10 and causes crash.*** 
 	public static boolean guessChecker(int guess){
 		//guess -1 so that the user input aligns with the number on the word list.
 		guess--;
 		System.out.print("\n");
 		
-		//Allows user to exit game
-		if(guess <= -1){
-			return true;
-		}
-		
 		//If the guess and the word are the same, congratulate player and exit game.
-		else if(wordGen.getWord(guess).equals(chosenWord)){
+		if(wordGen.getWord(guess).equals(chosenWord)){
 			System.out.println("CONGRATULATIONS! " + wordGen.getWord(guess) + " was the correct word!");
 			if(numberOfGuesses == 1){
 				System.out.println("You solved it in a single guess!");
@@ -207,4 +203,13 @@ public class WordGuesserGame{
 		
 	}
 	
+	public void setChosenWord(String chosenWord){
+		this.chosenWord = chosenWord;
+	}
+	
+	public String getChosenWord(){
+		return chosenWord;
+	}
+	
 }
+

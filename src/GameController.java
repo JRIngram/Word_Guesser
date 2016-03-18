@@ -2,7 +2,7 @@ import javax.swing.JOptionPane;
 
 /**Main Controller of the game
  * @author JRIngram
- * @version 17/03/2016
+ * @version 18/03/2016
  * 
  **/ 
 
@@ -13,14 +13,12 @@ public class GameController {
 	private static WordGenerator wordGen;
 	private static WordGuesserGUI gui;
 	private static GuessHandler handler; 
-	private static boolean correct;
-	
+		
 	public static void main(String args[]){
 		wordGen = new WordGenerator();
-		correct = false; 
 		chooseDifficulty();
 		handler = new GuessHandler(wordGen);
-		gui = new WordGuesserGUI(wordGen);
+		gui = new WordGuesserGUI(wordGen, handler);
 	}
 	
 	/**Allows the user to choose one of the predefined difficulties, through a dialogue box:
