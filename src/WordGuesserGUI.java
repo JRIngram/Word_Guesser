@@ -6,6 +6,7 @@ import javax.swing.*;
 /**Generates a GUI for the Word Guesser Game
  * @author JRIngram
  * @version 19/03/2016
+ *
  **/ 
 
 public class WordGuesserGUI {
