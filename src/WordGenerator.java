@@ -4,7 +4,6 @@ import java.util.Random;
 /**Generates a word using random letters and controls access to word list.
  * @author JRIngram
  * @version 17/03/2016
- * 
  **/ 
 
 public class WordGenerator{

@@ -3,7 +3,6 @@ import javax.swing.JOptionPane;
 /**Main Controller of the game
  * @author JRIngram
  * @version 18/03/2016
- * 
  **/ 
 
 //----CREATE GUI AND GUESSHANDLER USING THE SAME WORDGENERATOR BY CREATING THEM BOTH IN THIS CLASS.
