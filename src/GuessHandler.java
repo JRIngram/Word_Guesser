@@ -1,7 +1,7 @@
 /**Handles and processes the players guesses
  * 
  * @author JRIngram
- * @version 18/03/2016
+ * @version 19/03/2016
  *
  */
 public class GuessHandler {
