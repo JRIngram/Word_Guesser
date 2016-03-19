@@ -3,6 +3,7 @@ import javax.swing.JOptionPane;
 
 /**@version 17/03/2016
  * @author JRIngram 
+ *
  * */
 
 public class WordGuesserGame{

@@ -2,7 +2,7 @@ import javax.swing.JOptionPane;
 
 /**Main Controller of the game
  * @author JRIngram
- * @version 18/03/2016
+ * @version 19-03-2016
  *
  **/ 
 
