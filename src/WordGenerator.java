@@ -3,7 +3,7 @@ import java.util.Random;
 
 /**Generates a word using random letters and controls access to word list.
  * @author JRIngram
- * @version 06/03/2016
+ * @version 19/03/2016
  * 
  **/ 
 
@@ -192,10 +192,9 @@ public class WordGenerator{
 	}
 	
 	/**
-	 * Prints all item in the wordList array.
-	 * 
-	 * <p>Prints all item in the wordList array. This would need to be edited if the size of the wordList array was increased,
-	 * as a normal for loop is used rather than an enhanced for loop.</p> 
+	 * Generates a string containing all words in the wordList array.
+	 * <p>Creates a string containing all words in the wordList array. <i>This would need to be edited if the size of the wordList array was increased over 10.</i></p>
+	 * @return The list of words generated, as a numbered list. 
 	 * */
 	public String printWordList(){
 		StringBuilder sb = new StringBuilder();
