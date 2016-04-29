@@ -16,7 +16,7 @@ public class GameController {
 	private static GuessHandler handler; 
 		
 	public static void main(String args[]) throws IOException{
-		DictWordGenerator apple = new DictWordGenerator();
+		//DictWordGenerator testDictWordGen = new DictWordGenerator(); USED FOR TESTING.
 		wordGen = new WordGenerator();
 		chooseDifficulty();
 		handler = new GuessHandler(wordGen);
