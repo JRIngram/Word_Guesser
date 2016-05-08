@@ -2,194 +2,32 @@ package ingram.jr.WordGuesserGame;
 
 import java.util.Random;
 
-/**Generates a word using random letters and controls access to word list.
- * @author JRIngram
- * @version 19/03/2016
+/**Super class for word generators.
  * 
- **/ 
+ * @author JRIngram
+ * @version 08/05/2016
+ *
+ */
 
-public class WordGenerator{
-	private String[] words;
-	private int wordLength = 0;
+public abstract class WordGenerator {
 	
+	protected String words[];
 	
-	/**Creates an empty String array which can hold 10 items used for holding the generated words.
+	/** Creates an empty String array of length 10.
 	 * 
-	 * */
+	 */
 	public WordGenerator(){
 		words = new String[10];
 	}
 	
-	/**
-	 *	Randomly generates a word with the length specified by the user.
-	 * <p>Letters 2, 5, 8 and 10 letters are vowels, others are consonants.
-	 * To change this change the values of i (where i + 1 = vowel) in the if statement within the method.</p>
+	/** Generates a list of 10 words of varying length.
 	 * 
-	 * @param wordLength Determines number of iterations of for loop, and thus length of all generated words.
-	 * @return A String type which is contained in the Object's String array 'words'.
-	 * */
-	private String generateWord(int wordLength){
-		this.wordLength = wordLength;
-		Random vowelRandom = new Random();
-		Random consonantRandom = new Random();
-		String word;
-		StringBuilder wordBuilder = new StringBuilder();
-								
-		for(int i = 0; i < wordLength; i++){
-			if(i == 1 || i == 4 || i == 7 || i == 9){ //On 2nd, 4th, 7th and 10th letter, generate a vowel. 
-				int vowelNumber = vowelRandom.nextInt(5);
-				wordBuilder.append(vowelGenerator(vowelNumber));
-			}else{ 
-				int consonantNumber = consonantRandom.nextInt(21);
-				wordBuilder.append(consonantGenerator(consonantNumber));
-			}
-		}
-		word = wordBuilder.toString().toUpperCase();
-		return word;
-		
-	}
-	
-	/**
-	 * Creates a list of vowels and selects one based on parameter.
-	 * <p>Takes the parameter vowelNumber and chooses a vowel based off of that, using a switch statement, with each different case being a different vowel.</p>
-	 * <p>E! marks an error, and is the default case.</p>
-	 * 
-	 * @param vowelNumber The parameter which decides which vowel is returned. This is given to this method from the 'WordGuesserGame' class.
-	 * @return String: A vowel character. 
-	 * */
-	private String vowelGenerator(int vowelNumber){
-		String vowel = null;
-		switch(vowelNumber){
-			case 0:
-				vowel = "a";
-				break;
-			case 1:
-				vowel = "e";
-				break;
-			case 2:
-				vowel = "i";
-				break;
-			case 3: 
-				vowel = "o";
-				break;
-			case 4:
-				vowel = "u";
-				break;
-			default:
-				vowel = "E!"; //Signifies an error.
-		}
-		return vowel;
-		
-	}
-	
-	/**
-	 * Creates a list of consonants and selects one based on parameter.
-	 * <p>Takes the parameter consonantNumber and chooses a vowel based off of that, using a switch statement, with each different case being a different consonant.</p>
-	 * <p>E! marks an error, and is the default case.</p>
-	 * 
-	 * @param consonantNumber The parameter which decides which consonant is returned. This is given to this method from the 'WordGuesserGame' class.
-	 * @return String: A consonant character. 
-	 * */
-	private String consonantGenerator(int consonantNumber){
-		String consonant = null;
-		switch(consonantNumber){
-		case 0:
-			consonant = "b";
-			break;
-		case 1: 
-			consonant = "c";
-			break;
-		case 2:
-			consonant = "d";
-			break;
-		case 3:
-			consonant = "f";
-			break; 
-		case 4:
-			consonant = "g";
-			break;
-		case 5:
-			consonant = "h";
-			break;
-		case 6: 
-			consonant = "j";
-			break;
-		case 7:
-			consonant = "k";
-			break;
-		case 8:
-			consonant = "l";
-			break;
-		case 9:
-			consonant = "m";
-			break;
-		case 10:
-			consonant = "n";
-			break;
-		case 11:
-			consonant = "p";
-			break;
-		case 12:
-			consonant = "q";
-			break;
-		case 13:
-			consonant = "r";
-			break;
-		case 14:
-			consonant = "s";
-			break;
-		case 15:
-			consonant = "t";
-			break;
-		case 16:
-			consonant = "v";
-			break;
-		case 17:
-			consonant = "w";
-			break;
-		case 18:
-			consonant = "x";
-			break;
-		case 19:
-			consonant = "y";
-			break;
-		case 20:
-			consonant = "z";
-			break;
-		default:
-			consonant = "E!"; //Signifies an error.
-			
-		}
-		return consonant;
-	}
-	
-	/**
-	 * Checks word length and creates a list of 10 words
-	 * <p>Calls the generateWord method 10 times to produce a list of 10 words. If a word that's generated is the same as a previous word, the word is regenerated until it's different to a previous word.</p> 
-	 * 
-	 * @param wordLength Determines the length of the words generated.
-	 * */
-	public void makeWordList(int wordLength){
-		this.wordLength = wordLength;
-		for(int i = 0; i < 10; i++){
-			words[i] = generateWord(wordLength);
-			//If the new word is the same as a previous word, regenerate.
-			for(int c = i - 1; c >= 0 ; c--){
-				while(words[i].equals(words[c])){
-					words[i] = generateWord(wordLength);
-				}
-			}
-		}
-	}
-	
-	/**
-	 * Returns the word length of the words generated.
-	 * 
-	 * @return returns wordLength (int type).
+	 * @param length The length of the words we desire.
 	 */
-	public int getWordLength(){
-		return wordLength;
-	}
+	
+	public abstract void makeWordList(int length);
+	
+	public abstract void regenerateSpecificWord(int index);
 	
 	/**
 	 * Prints all item in the wordList array.
@@ -209,6 +47,25 @@ public class WordGenerator{
 		return sb.toString();
 	}
 	
+	/** Cycles through the words array list and checks that all words are unique.
+	 *  Completes this using an embedded for loop. If a word has to be regenerated, all loops are reset.
+	 */
+	
+	public void uniqueWordChecker(){
+		for(int i = 0; i < words.length; i++){
+			for(int c = words.length - 1; c >= 0; c--){
+				if(c != i){
+					if(words[i].equals(words[c])){
+						regenerateSpecificWord(i);
+						i = 0;
+						c = 0;
+					}
+				}
+			}
+		}
+		System.out.println("All words unique!");
+	}
+	
 	/**
 	 * Selects and returns a random word from the generated words.
 	 * 
@@ -221,17 +78,5 @@ public class WordGenerator{
 		String chosenWord = words[wordNumber];
 		return chosenWord;
 		
-	}
-	
-	/**
-	 * Returns a word from the list of Words.
-	 * 
-	 * @param index number to determine which word from the wordList array will be returned. 
-	 * @return String: A word from the wordList array.
-	 * 
-	 * */
-	
-	public String getWord(int index){
-		return words[index];
 	}
 }

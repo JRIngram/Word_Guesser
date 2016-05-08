@@ -6,11 +6,11 @@ import javax.swing.JOptionPane;
  * @author JRIngram 
  *
  * @see GameController
- * @see WordGenerator
+ * @see RandomWordGenerator
  * */
 
 public class WordGuesserGame{
-	private static WordGenerator wordGen;
+	private static RandomWordGenerator wordGen;
 	private static Scanner input;
 	private static String chosenWord;
 	private static int numberOfGuesses;
@@ -21,7 +21,7 @@ public class WordGuesserGame{
 	 * Main class: consists of assigning variables and a main-loop
 	 * */
 	public WordGuesserGame(){
-		wordGen = new WordGenerator();
+		wordGen = new RandomWordGenerator();
 		//GuessHandler gh = new GuessHandler(wordGen); 
 		input = new Scanner(System.in);
 		chosenWord = null;

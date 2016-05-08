@@ -11,9 +11,9 @@ public class GuessHandler {
 	
 	private int numberOfGuesses;
 	private String chosenWord;
-	private WordGenerator wordGen;
+	private RandomWordGenerator wordGen;
 	
-	public GuessHandler(WordGenerator wg){
+	public GuessHandler(RandomWordGenerator wg){
 		this.wordGen = wg;
 		numberOfGuesses = 0;
 		chosenWord = wordGen.wordChooser();

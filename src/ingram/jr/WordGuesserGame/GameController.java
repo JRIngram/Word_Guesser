@@ -11,13 +11,13 @@ import java.io.IOException;
  **/ 
 public class GameController {
 	
-	private static WordGenerator wordGen;
+	private static RandomWordGenerator wordGen;
 	private static WordGuesserGUI gui;
 	private static GuessHandler handler; 
 		
 	public static void main(String args[]) throws IOException{
-		//DictWordGenerator testDictWordGen = new DictWordGenerator(); USED FOR TESTING.
-		wordGen = new WordGenerator();
+		DictWordGenerator testDictWordGen = new DictWordGenerator();
+		wordGen = new RandomWordGenerator();
 		chooseDifficulty();
 		handler = new GuessHandler(wordGen);
 		gui = new WordGuesserGUI(wordGen, handler);

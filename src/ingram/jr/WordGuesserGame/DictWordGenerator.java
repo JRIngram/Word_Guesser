@@ -12,17 +12,15 @@ import java.util.Random;
 /**Reads word for text file dictionary.txt to produce words.
  * 
  * @author Jamie Ingram
- * @version 28/04/2016
+ * @version 08/05/2016
  * 
  * TODO Ensure that two words cannot be the same when selected.
- * TODO Remove non-alphabetical characters.
  * 
  */
 
-public class DictWordGenerator {
+public class DictWordGenerator extends WordGenerator {
 	private BufferedReader reader;
 	private ArrayList<String> potentialWords;
-	private String[] words;
 	private String filePath;
 	private Scanner dictionaryScanner;
 
@@ -32,21 +30,20 @@ public class DictWordGenerator {
 	 */
 	
 	public DictWordGenerator() throws IOException{
+		super();
 		try{
 			filePath = "dictionary.txt";
 			potentialWords = new ArrayList<String>();
 			dictionaryScanner = new Scanner(new File(filePath));
-			words = new String[10];
 			reader = new BufferedReader(new FileReader(filePath));
 			System.out.println(filePath + " successfully read.");
-			fillPotentialWords(10); //Placeholder - change values for testing.
+			makeWordList(1);
 		}catch(Exception e){
 			System.out.println("Error reading file!");
 		}finally{
 			reader.close();
 		}
-		System.out.println("Chosen words: ");
-		chooseWords();
+
 	}
 
 	/** Creates a list of words from the dictionary.txt file and places them in an ArrayList.
@@ -57,7 +54,7 @@ public class DictWordGenerator {
 		System.out.println("Adding words to potentialWords...");
 		while(dictionaryScanner.hasNext()){
 			String word = dictionaryScanner.next();
-			if(word.length() == length){
+			if(word.length() == length && word.matches("[a-zA-Z]+")){
 				potentialWords.add(word);
 			}
 		}
@@ -67,15 +64,25 @@ public class DictWordGenerator {
 	/**Choose 10 words from the list of potential words.
 	 * 
 	 */
-	private void chooseWords(){
+	public void makeWordList(int length){
+		fillPotentialWords(length);
 		Random rand = new Random();
 		int[] previousRands = new int[10];
 		for(int i = 0; i < words.length; i++){
 			previousRands[i] = rand.nextInt(potentialWords.size());
 			words[i] = potentialWords.get(previousRands[i]);
 		}
-		for(int i = 0; i < 10; i++){
-			System.out.println(words[i]);
-		}
+		uniqueWordChecker();
+	}
+	
+	/** Regenerates the word at the index position in the words array.
+	 * 
+	 *  @param index The index of the word we wish to regenerate.
+	 */
+	
+	public void regenerateSpecificWord(int index){
+		Random rand = new Random();
+		int randomWord = rand.nextInt(potentialWords.size());
+		words[index] = potentialWords.get(randomWord);
 	}
 }

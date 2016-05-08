@@ -20,7 +20,7 @@ public class WordGuesserGUI {
 	private JButton quitButton;
 	private GuessHandler gh;
 
-	public WordGuesserGUI(WordGenerator wg, GuessHandler gh){
+	public WordGuesserGUI(RandomWordGenerator wg, GuessHandler gh){
 		this.gh = gh;
 		quitButton = new JButton();
 		quitButton.setText("Quit");
