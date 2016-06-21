@@ -6,7 +6,7 @@ import javax.swing.*;
 
 /**Generates a GUI for the Word Guesser Game
  * @author JRIngram
- * @version 19/03/2016
+ * @version 21/06/2016
  * 
  * @see GameController 
  * @see GuessHandler
@@ -20,11 +20,12 @@ public class WordGuesserGUI {
 	private JButton quitButton;
 	private GuessHandler gh;
 
-	public WordGuesserGUI(RandomWordGenerator wg, GuessHandler gh){
+	public WordGuesserGUI(WordGenerator wg, GuessHandler gh){
 		this.gh = gh;
 		quitButton = new JButton();
 		quitButton.setText("Quit");
 		quitButton.setToolTipText("Allows user to exit program");
+		
 		//Constructs 10 buttons, 1 for each word.
 		wordButton = new JButton[10];
 		for(int i = 0; i <= wordButton.length - 1; i++){
@@ -32,6 +33,7 @@ public class WordGuesserGUI {
 			wordButton[i].setText(wg.getWord(i));
 			wordButton[i].setToolTipText("Guess " + wg.getWord(i) + " as the correct word.");
 		}
+		
 		list = new JTextArea(wg.printWordList() +
 				"The computer has chosen a word from the list above.\n"
 				+ "It is your job to work out which word the computer has chosen.\n"
@@ -45,13 +47,14 @@ public class WordGuesserGUI {
 		
 		//GUI properties.
 		list.setEditable(false);
+		list.setCaretPosition(list.getDocument().getLength());
 		JScrollPane listScroller = new JScrollPane(list);
 		listScroller.setMinimumSize(new Dimension(200,200));
 		listScroller.setPreferredSize(new Dimension(300,300));
 		mainFrame = new JFrame("Word Guesser Game");
 		mainFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-		mainFrame.setPreferredSize(new Dimension(400, 400));
-		mainFrame.setMinimumSize(new Dimension(600,500));
+		mainFrame.setPreferredSize(new Dimension(650, 400));
+		mainFrame.setMinimumSize(new Dimension(650,500));
 		JPanel guessBox = new JPanel();
 		JPanel guessRow1 = new JPanel();
 		JPanel guessRow2 = new JPanel();

@@ -4,13 +4,11 @@ import java.util.Random;
 
 /**Generates a word using random letters and controls access to word list.
  * @author JRIngram
- * @version 08/05/2016
+ * @version 21/06/2016
  * 
  **/ 
 
 public class RandomWordGenerator extends WordGenerator{
-	private int wordLength = 0;
-	
 	
 	/**Creates an empty String array which can hold 10 items used for holding the generated words.
 	 * 
@@ -32,8 +30,7 @@ public class RandomWordGenerator extends WordGenerator{
 		Random vowelRandom = new Random();
 		Random consonantRandom = new Random();
 		String word;
-		StringBuilder wordBuilder = new StringBuilder();
-								
+		StringBuilder wordBuilder = new StringBuilder();						
 		for(int i = 0; i < wordLength; i++){
 			if(i == 1 || i == 4 || i == 7 || i == 9){ //On 2nd, 4th, 7th and 10th letter, generate a vowel. 
 				int vowelNumber = vowelRandom.nextInt(5);
@@ -186,25 +183,4 @@ public class RandomWordGenerator extends WordGenerator{
 		uniqueWordChecker();
 	}
 	
-	/**
-	 * Returns the word length of the words generated.
-	 * 
-	 * @return returns wordLength (int type).
-	 */
-	public int getWordLength(){
-		return wordLength;
-	}
-	
-	
-	/**
-	 * Returns a word from the list of Words.
-	 * 
-	 * @param index number to determine which word from the wordList array will be returned. 
-	 * @return String: A word from the wordList array.
-	 * 
-	 * */
-	
-	public String getWord(int index){
-		return words[index];
-	}
 }

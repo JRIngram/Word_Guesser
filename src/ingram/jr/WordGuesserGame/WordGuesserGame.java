@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
  * */
 
 public class WordGuesserGame{
-	private static RandomWordGenerator wordGen;
+	private static WordGenerator wordGen;
 	private static Scanner input;
 	private static String chosenWord;
 	private static int numberOfGuesses;

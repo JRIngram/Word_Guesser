@@ -12,9 +12,7 @@ import java.util.Random;
 /**Reads word for text file dictionary.txt to produce words.
  * 
  * @author Jamie Ingram
- * @version 08/05/2016
- * 
- * TODO Ensure that two words cannot be the same when selected.
+ * @version 21/06/2016
  * 
  */
 
@@ -37,7 +35,6 @@ public class DictWordGenerator extends WordGenerator {
 			dictionaryScanner = new Scanner(new File(filePath));
 			reader = new BufferedReader(new FileReader(filePath));
 			System.out.println(filePath + " successfully read.");
-			makeWordList(1);
 		}catch(Exception e){
 			System.out.println("Error reading file!");
 		}finally{
@@ -48,14 +45,15 @@ public class DictWordGenerator extends WordGenerator {
 
 	/** Creates a list of words from the dictionary.txt file and places them in an ArrayList.
 	 * 
-	 * @param length The number of characters in the words we want in the list.
+	 * @param wordLength The number of characters in the words we want in the list.
 	 */
-	private void fillPotentialWords(int length){
+	private void fillPotentialWords(int wordLength){
+		this.wordLength = wordLength;
 		System.out.println("Adding words to potentialWords...");
 		while(dictionaryScanner.hasNext()){
 			String word = dictionaryScanner.next();
-			if(word.length() == length && word.matches("[a-zA-Z]+")){
-				potentialWords.add(word);
+			if(word.length() == wordLength && word.matches("[a-zA-Z]+")){
+				potentialWords.add(word.toUpperCase());
 			}
 		}
 		System.out.println("List completed: Selecting Words.");

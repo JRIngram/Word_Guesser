@@ -5,13 +5,14 @@ import java.util.Random;
 /**Super class for word generators.
  * 
  * @author JRIngram
- * @version 08/05/2016
+ * @version 21/06/2016
  *
  */
 
 public abstract class WordGenerator {
 	
 	protected String words[];
+	protected int wordLength;
 	
 	/** Creates an empty String array of length 10.
 	 * 
@@ -78,5 +79,26 @@ public abstract class WordGenerator {
 		String chosenWord = words[wordNumber];
 		return chosenWord;
 		
+	}
+	
+	/**
+	 * Returns a word from the list of Words.
+	 * 
+	 * @param index number to determine which word from the wordList array will be returned. 
+	 * @return String: A word from the wordList array.
+	 * 
+	 * */
+	
+	public String getWord(int index){
+		return words[index];
+	}
+	
+	/**
+	 * Returns the word length of the words generated.
+	 * 
+	 * @return returns wordLength (int type).
+	 */
+	public int getWordLength(){
+		return wordLength;
 	}
 }

@@ -3,34 +3,42 @@ import javax.swing.JOptionPane;
 import java.io.IOException;
 
 /**Main Controller of the game
+ * 
  * @author JRIngram
- * @version 19/03/2016
+ * @version 21/06/2016
  * 
  * @see WordGuesserGame
  * 
- **/ 
+ */ 
 public class GameController {
-	
-	private static RandomWordGenerator wordGen;
+
+	private static WordGenerator wordGen;
 	private static WordGuesserGUI gui;
 	private static GuessHandler handler; 
-		
+
 	public static void main(String args[]) throws IOException{
 		DictWordGenerator testDictWordGen = new DictWordGenerator();
-		wordGen = new RandomWordGenerator();
+		int gameMode = chooseGameMode();
+		if(gameMode == 0){
+			//realwords.
+			wordGen = new DictWordGenerator();
+		}else{
+			//falseFakeWords. KILL KILL KILL!
+			wordGen = new RandomWordGenerator();
+		}
 		chooseDifficulty();
 		handler = new GuessHandler(wordGen);
 		gui = new WordGuesserGUI(wordGen, handler);
 	}
-	
+
 	/**Allows the user to choose one of the predefined difficulties, through a dialogue box:
 	 * <p>'EASY': Easy, sets the word length as 5.</p>
 	 * <p>'MED': Medium, sets the word length as 7.</p>
 	 * <p>'HARD': Hard, sets the word length as 10.</p>
 	 * <p>'CUST': Customer, allows the player to set the word length between 3 and 10, using a dialogue box.</p>
 	 * */	
-	
-	public static void chooseDifficulty(){
+
+	private static void chooseDifficulty(){
 		String[] options = new String[4];
 		String difficultyMessage = "Welcome to WordGuesser! What difficulty would you like to play?:" +
 				"\n'EASY': 5 letter-length words, 4 guesses." +
@@ -96,6 +104,33 @@ public class GameController {
 			System.out.println("Dialogue box closed too early, defaulted to easy difficulty.");
 			break;
 		}
-		
+
+	}
+	
+	/** <p>Creates a JOptionPane dialog box with two choices. Asks the user whether they want to choose pseudo-random words or reals words supplied from (dictionary.txt).</p>
+	 * @return The chosen game mode (0 for real words; 1 for pseudo-random words).
+	 */
+	private static int chooseGameMode(){
+		JOptionPane gameModeSelector = new JOptionPane();
+		String[] gameModes =  {
+				"Real Words", "'Random' Words"
+		};
+		String gameModeDescriptions = "Which game mode would you like to play?\nReal Words uses words from a dictionary file.\nRandom Words' creates pseudo-random words.";
+		int gameMode = gameModeSelector.showOptionDialog(
+				null,
+				gameModeDescriptions,
+				"Select Game Mode.", 
+				JOptionPane.YES_NO_OPTION, 
+				JOptionPane.QUESTION_MESSAGE, 
+				null, 
+				gameModes, 
+				gameModes[0]);	
+		if(gameMode == 1){
+			System.out.println("FALSE WORDS MUST DIE!");
+		}
+		else if(gameMode == 0){
+			System.out.println("THE TRUE LORD AND REAL WORDS!");
+		}
+		return gameMode;
 	}
 }
