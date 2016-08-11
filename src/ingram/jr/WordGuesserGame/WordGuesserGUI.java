@@ -51,7 +51,7 @@ public class WordGuesserGUI {
 		JScrollPane listScroller = new JScrollPane(list);
 		listScroller.setMinimumSize(new Dimension(200,200));
 		listScroller.setPreferredSize(new Dimension(300,300));
-		mainFrame = new JFrame("Word Guesser Game");
+		mainFrame = new JFrame("Word Guesser Game\tV1.0.0");
 		mainFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		mainFrame.setPreferredSize(new Dimension(650, 400));
 		mainFrame.setMinimumSize(new Dimension(650,500));

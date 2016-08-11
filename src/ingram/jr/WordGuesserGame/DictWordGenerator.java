@@ -36,7 +36,7 @@ public class DictWordGenerator extends WordGenerator {
 			reader = new BufferedReader(new FileReader(filePath));
 			System.out.println(filePath + " successfully read.");
 		}catch(Exception e){
-			System.out.println("Error reading file!");
+			System.out.println("Error reading file!\n");
 		}finally{
 			reader.close();
 		}

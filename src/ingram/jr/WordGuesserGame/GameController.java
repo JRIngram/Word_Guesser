@@ -125,12 +125,6 @@ public class GameController {
 				null, 
 				gameModes, 
 				gameModes[0]);	
-		if(gameMode == 1){
-			System.out.println("FALSE WORDS MUST DIE!");
-		}
-		else if(gameMode == 0){
-			System.out.println("THE TRUE LORD AND REAL WORDS!");
-		}
 		return gameMode;
 	}
 }
