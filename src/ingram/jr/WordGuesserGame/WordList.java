@@ -42,12 +42,41 @@ public class WordList {
 		front = 0;
 	}
 	
+	/**
+	 * Returns the current amount of items in the WordList
+	 * @return
+	 */
 	public int getCurrentSize(){
 		return front;
 	}
 	
+	/**
+	 * Returns the maximum size of the WordList
+	 * @return
+	 */
 	public int getMaxSize(){
 		return maxSize;
+	}
+	
+	/**
+	 * Returns a specific word from the WordList
+	 * @param index Index of the word you want to retrieve. 
+	 * @return
+	 */
+	public String getWord(int index){
+		return words[index];
+	}
+	
+	/**
+	 * Prints the numbers of words in the list.
+	 */
+	@Override
+	public String toString(){
+		String listString = "";
+		for(int i = 0; i < front; i++){
+			listString += words[i] + "\n";
+		}
+		return listString;
 	}
 	
 }
