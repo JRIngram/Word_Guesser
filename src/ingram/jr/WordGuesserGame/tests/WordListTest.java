@@ -61,5 +61,13 @@ public class WordListTest {
 		assertEquals(false, wordList.addWord("Carrot"));
 		assertEquals(2, wordList.getCurrentSize());
 	}
+	
+	@Test
+	public void testGetWord(){
+		assertEquals("ERROR", wordList.getWord(0));
+		assertEquals(true, wordList.addWord("Apple"));
+		assertEquals(1, wordList.getCurrentSize());
+		assertEquals("Apple", wordList.getWord(0));
+	}
 
 }

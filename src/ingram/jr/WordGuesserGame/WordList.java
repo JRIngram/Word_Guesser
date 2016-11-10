@@ -64,7 +64,15 @@ public class WordList {
 	 * @return
 	 */
 	public String getWord(int index){
-		return words[index];
+		try{
+			if(!words[index].equals(null))
+				return words[index];
+			else
+				return "ERROR";
+		}catch(NullPointerException e){
+			return "ERROR";
+		}
+			
 	}
 	
 	/**
